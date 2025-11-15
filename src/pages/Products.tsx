@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 
 const Products = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
-  const categories = ["All", "Audio", "Wearables", "Computers", "Mobile", "Tablets"];
+  const categories = ["All", "Laptops", "Mobiles", "Cameras", "Speakers", "Smartwatches", "Pendrives", "Powerbanks", "TV", "AC", "Refrigerators"];
 
   const filteredProducts =
     selectedCategory === "All"

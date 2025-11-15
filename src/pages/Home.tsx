@@ -7,6 +7,7 @@ import heroImage from "@/assets/hero-image.jpg";
 
 const Home = () => {
   const featuredProducts = products.slice(0, 3);
+  const discountedProducts = products.filter(p => p.discount && p.discount >= 10).slice(0, 6);
 
   return (
     <div className="min-h-screen bg-background">
@@ -55,6 +56,21 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Discount Section */}
+      <section className="container mx-auto px-4 py-16">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-bold mb-4">Up to 30% Off</h2>
+          <p className="text-lg text-muted-foreground">
+            Limited time offers on selected products
+          </p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {discountedProducts.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+      </section>
+
       {/* Categories */}
       <section className="bg-muted py-16">
         <div className="container mx-auto px-4">
@@ -64,12 +80,12 @@ const Home = () => {
               Find exactly what you're looking for
             </p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {["Audio", "Wearables", "Computers", "Mobile"].map((category) => (
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
+            {["Laptops", "Mobiles", "Cameras", "Speakers", "Smartwatches"].map((category) => (
               <Link
                 key={category}
                 to="/products"
-                className="bg-card p-8 rounded-lg text-center hover:shadow-lg transition-shadow duration-300 group"
+                className="bg-card p-8 rounded-lg text-center transition-all duration-300 group hover:shadow-xl hover:-translate-y-1"
               >
                 <h3 className="text-xl font-semibold group-hover:text-accent transition-colors">
                   {category}

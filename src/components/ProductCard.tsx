@@ -36,11 +36,27 @@ const ProductCard = ({ product }: ProductCardProps) => {
           <span className="text-sm text-muted-foreground">({product.reviews})</span>
         </div>
         <div className="flex items-center justify-between">
-          <span className="text-2xl font-bold">${product.price}</span>
+          <div>
+            {product.discount ? (
+              <div className="flex flex-col">
+                <span className="text-sm text-muted-foreground line-through">${product.price}</span>
+                <span className="text-2xl font-bold">${(product.price * (1 - product.discount / 100)).toFixed(2)}</span>
+              </div>
+            ) : (
+              <span className="text-2xl font-bold">${product.price}</span>
+            )}
+          </div>
           <span className={`text-xs ${product.inStock ? "text-green-600" : "text-destructive"}`}>
             {product.inStock ? "In Stock" : "Out of Stock"}
           </span>
         </div>
+        {product.discount && (
+          <div className="mt-2">
+            <span className="text-xs font-semibold bg-accent text-accent-foreground px-2 py-1 rounded">
+              {product.discount}% OFF
+            </span>
+          </div>
+        )}
       </CardContent>
       <CardFooter className="p-4 pt-0">
         <Button
