@@ -12,7 +12,7 @@ export const products: Product[] = [
   {
     id: "1",
     name: "MacBook Pro 16-inch",
-    price: 2499.99,
+    price: 199920,
     description: "Powerful M3 Pro chip, stunning Retina display. Perfect for professionals.",
     image: product3,
     category: "Laptops",

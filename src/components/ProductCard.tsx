@@ -39,11 +39,11 @@ const ProductCard = ({ product }: ProductCardProps) => {
           <div>
             {product.discount ? (
               <div className="flex flex-col">
-                <span className="text-sm text-muted-foreground line-through">${product.price}</span>
-                <span className="text-2xl font-bold">${(product.price * (1 - product.discount / 100)).toFixed(2)}</span>
+                <span className="text-sm text-muted-foreground line-through">₹{product.price.toLocaleString('en-IN')}</span>
+                <span className="text-2xl font-bold">₹{(product.price * (1 - product.discount / 100)).toLocaleString('en-IN', { maximumFractionDigits: 0 })}</span>
               </div>
             ) : (
-              <span className="text-2xl font-bold">${product.price}</span>
+              <span className="text-2xl font-bold">₹{product.price.toLocaleString('en-IN')}</span>
             )}
           </div>
           <span className={`text-xs ${product.inStock ? "text-green-600" : "text-destructive"}`}>

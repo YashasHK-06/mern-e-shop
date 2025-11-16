@@ -9,39 +9,39 @@ All colors MUST be HSL.
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 75 20% 15%;
+    --foreground: 75 25% 12%;
     --card: 0 0% 100%;
-    --card-foreground: 75 20% 15%;
+    --card-foreground: 75 25% 12%;
     --popover: 0 0% 100%;
-    --popover-foreground: 75 20% 15%;
-    --primary: 75 20% 15%;
+    --popover-foreground: 75 25% 12%;
+    --primary: 75 25% 12%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 65 35% 72%;
-    --secondary-foreground: 75 20% 15%;
-    --muted: 65 18% 67%;
-    --muted-foreground: 75 15% 35%;
-    --accent: 65 45% 78%;
-    --accent-foreground: 75 20% 15%;
+    --secondary: 65 40% 58%;
+    --secondary-foreground: 75 25% 12%;
+    --muted: 65 20% 55%;
+    --muted-foreground: 75 20% 30%;
+    --accent: 65 45% 70%;
+    --accent-foreground: 75 25% 12%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
     --border: 65 18% 85%;
     --input: 65 18% 85%;
-    --ring: 75 20% 15%;
+    --ring: 75 25% 12%;
     --radius: 0.5rem;
-    --gradient-hero: linear-gradient(135deg, hsl(75 20% 15%) 0%, hsl(75 20% 20%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(75 25% 12%) 0%, hsl(75 25% 18%) 100%);
     --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(65 35% 98%) 100%);
-    --shadow-sm: 0 1px 2px 0 hsl(75 20% 15% / 0.05);
-    --shadow-md: 0 4px 6px -1px hsl(75 20% 15% / 0.1);
-    --shadow-lg: 0 10px 15px -3px hsl(75 20% 15% / 0.1);
+    --shadow-sm: 0 1px 2px 0 hsl(75 25% 12% / 0.05);
+    --shadow-md: 0 4px 6px -1px hsl(75 25% 12% / 0.1);
+    --shadow-lg: 0 10px 15px -3px hsl(75 25% 12% / 0.1);
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 75 20% 15%;
-    --sidebar-primary: 75 20% 15%;
+    --sidebar-foreground: 75 25% 12%;
+    --sidebar-primary: 75 25% 12%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 65 35% 72%;
-    --sidebar-accent-foreground: 75 20% 15%;
+    --sidebar-accent: 65 40% 58%;
+    --sidebar-accent-foreground: 75 25% 12%;
     --sidebar-border: 65 18% 85%;
-    --sidebar-ring: 75 20% 15%;
+    --sidebar-ring: 75 25% 12%;
   }
 
   .dark {
