@@ -58,7 +58,7 @@ const Cart = () => {
                         <p className="text-sm text-muted-foreground mb-2">
                           {item.category}
                         </p>
-                        <p className="text-xl font-bold">${item.price}</p>
+                        <p className="text-xl font-bold">₹{item.price.toLocaleString('en-IN')}</p>
                       </div>
                       <div className="flex items-center justify-between mt-4">
                         <div className="flex items-center gap-3">
@@ -103,7 +103,7 @@ const Cart = () => {
                 <div className="space-y-4 mb-6">
                   <div className="flex justify-between text-muted-foreground">
                     <span>Subtotal</span>
-                    <span>${cartTotal.toFixed(2)}</span>
+                    <span>₹{cartTotal.toLocaleString('en-IN')}</span>
                   </div>
                   <div className="flex justify-between text-muted-foreground">
                     <span>Shipping</span>
@@ -112,13 +112,15 @@ const Cart = () => {
                   <div className="border-t border-border pt-4">
                     <div className="flex justify-between text-xl font-bold">
                       <span>Total</span>
-                      <span>${cartTotal.toFixed(2)}</span>
+                      <span>₹{cartTotal.toLocaleString('en-IN')}</span>
                     </div>
                   </div>
                 </div>
-                <Button className="w-full" size="lg">
-                  Proceed to Checkout
-                </Button>
+                <Link to="/checkout">
+                  <Button className="w-full" size="lg">
+                    Proceed to Checkout
+                  </Button>
+                </Link>
                 <Link to="/products">
                   <Button variant="outline" className="w-full mt-3">
                     Continue Shopping
