@@ -2,15 +2,21 @@ import ProductCard from "@/components/ProductCard";
 import { products } from "@/lib/products";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Search } from "lucide-react";
 
 const Products = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
+  const [searchQuery, setSearchQuery] = useState<string>("");
   const categories = ["All", "Laptops", "Mobiles", "Cameras", "Speakers", "Smartwatches", "Pendrives", "Powerbanks", "TV", "AC", "Refrigerators"];
 
-  const filteredProducts =
-    selectedCategory === "All"
-      ? products
-      : products.filter((p) => p.category === selectedCategory);
+  const filteredProducts = products
+    .filter((p) => selectedCategory === "All" || p.category === selectedCategory)
+    .filter((p) => 
+      searchQuery === "" || 
+      p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      p.category.toLowerCase().includes(searchQuery.toLowerCase())
+    );
 
   return (
     <div className="min-h-screen bg-background py-12">
@@ -20,6 +26,20 @@ const Products = () => {
           <p className="text-lg text-muted-foreground">
             Browse our complete collection of premium tech products
           </p>
+        </div>
+
+        {/* Search Bar */}
+        <div className="max-w-2xl mx-auto mb-8">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+            <Input
+              type="text"
+              placeholder="Search products by name or category..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pl-10"
+            />
+          </div>
         </div>
 
         {/* Category Filter */}
