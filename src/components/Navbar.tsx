@@ -1,12 +1,26 @@
 import { Link } from "react-router-dom";
-import { ShoppingCart, Menu, X, User } from "lucide-react";
+import { ShoppingCart, Menu, X, User, Package } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/contexts/CartContext";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { supabase } from "@/integrations/supabase/client";
 
 const Navbar = () => {
   const { cartCount } = useCart();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setIsLoggedIn(!!session);
+    });
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setIsLoggedIn(!!session);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
 
   return (
     <nav className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -27,6 +41,13 @@ const Navbar = () => {
           </div>
 
           <div className="flex items-center gap-4">
+            {isLoggedIn && (
+              <Link to="/orders">
+                <Button variant="ghost" size="icon">
+                  <Package className="h-5 w-5" />
+                </Button>
+              </Link>
+            )}
             <Link to="/auth">
               <Button variant="ghost" size="icon">
                 <User className="h-5 w-5" />
@@ -73,6 +94,15 @@ const Navbar = () => {
               >
                 Products
               </Link>
+              {isLoggedIn && (
+                <Link
+                  to="/orders"
+                  className="text-sm font-medium text-foreground hover:text-accent transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Orders
+                </Link>
+              )}
             </div>
           </div>
         )}
