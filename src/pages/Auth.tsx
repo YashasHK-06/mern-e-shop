@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -15,6 +15,41 @@ const Auth = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
+
+  // Redirect if user is already logged in
+  useEffect(() => {
+    const checkUser = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session) {
+        // Check if user is admin
+        const { data: roles } = await supabase
+          .from("user_roles")
+          .select("role")
+          .eq("user_id", session.user.id);
+
+        const isAdmin = roles?.some((r) => r.role === "admin");
+        navigate(isAdmin ? "/admin" : "/", { replace: true });
+      }
+    };
+
+    checkUser();
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (session) {
+        setTimeout(async () => {
+          const { data: roles } = await supabase
+            .from("user_roles")
+            .select("role")
+            .eq("user_id", session.user.id);
+
+          const isAdmin = roles?.some((r) => r.role === "admin");
+          navigate(isAdmin ? "/admin" : "/", { replace: true });
+        }, 0);
+      }
+    });
+
+    return () => subscription.unsubscribe();
+  }, [navigate]);
 
   const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
