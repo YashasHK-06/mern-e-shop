@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useCart } from "@/contexts/CartContext";
 import { Button } from "@/components/ui/button";
@@ -24,6 +24,17 @@ const Payment = () => {
   });
 
   const address = location.state?.address;
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
+        toast.error("Please login to place an order");
+        navigate("/auth");
+      }
+    };
+    checkAuth();
+  }, [navigate]);
 
   if (!address || cart.length === 0) {
     navigate("/cart");
